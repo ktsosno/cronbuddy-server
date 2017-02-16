@@ -17,7 +17,9 @@ app.use('/api', router);
 
 crontabber.load(function (err, crontab) {
   var jobs = crontab.jobs();
-  console.log(jobs);
+  jobs.forEach(function (job) {
+    console.log(job.toString());
+  });
 });
 
 // router.get('/load', (request, response) => {

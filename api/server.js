@@ -13,10 +13,13 @@ app.use('/api', router);
 //app.listen(SERVER_PORT);
 //console.log(`Listening on ${SERVER_PORT}...`);
 
-crontabber.load(function(err, crontab) {
-  var jobs = crontab.jobs();
-  console.log(jobs);
+crontabber.load((err, crontab) => {
+  const jobs = crontab.jobs();
+  jobs.forEach((job) => {
+    console.log(job.toString());
+  });
 });
+
 
 // router.get('/load', (request, response) => {
 //   crontabber.load((err, crontab) => {
