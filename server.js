@@ -15,9 +15,26 @@ module.exports = function (directive, response) {
     }
   });
 };
+"use strict";
+
+exports.extractPayload = function () {
+  var request = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  var payload = {};
+  for (var x in request.body) {
+    payload[x] = request.body[x];
+  }
+  return payload;
+};
 'use strict';
 
 module.exports = function (tab, response, payload) {
+  if (!payload.action || !payload.timing) {
+    response.send({
+      error: 'Insufficient parameters passed for create'
+    });
+  }
+
   var task = tab.create(payload.action, payload.timing);
   if (!task) {
     response.send({
@@ -40,6 +57,12 @@ module.exports = function (tab, response, payload) {
 'use strict';
 
 module.exports = function (tab, response, payload) {
+  if (!payload.action) {
+    response.send({
+      error: 'Insufficient parameters passed for delete'
+    });
+  }
+
   tab.remove({ command: payload.action });
 
   tab.save(function (err) {
@@ -82,6 +105,7 @@ var router = express.Router();
 
 // Import application specific helpers
 var crontab = require('./api/helpers/crontab');
+var utils = require('./api/helpers/utils');
 
 // Import route specific directives
 var loadDirective = require('./api/routes/load');
@@ -112,17 +136,7 @@ router.get('/load', function (request, response) {
   * @return Success message
   */
 router.post('/create', function (request, response) {
-  var payload = {};
-
-  payload.action = request.body.action;
-  payload.timing = request.body.timing;
-
-  if (!payload.action || !payload.timing) {
-    response.send({
-      error: 'Insufficient parameters passed for create'
-    });
-  }
-
+  var payload = utils.extractPayload(request);
   crontab(createDirective, response, payload);
 });
 
@@ -132,14 +146,6 @@ router.post('/create', function (request, response) {
   * @return Success message
   */
 router.post('/delete', function (request, response) {
-  var payload = {};
-
-  payload.action = request.body.action;
-  if (!payload.action) {
-    response.send({
-      error: 'Insufficient parameters passed for delete'
-    });
-  }
-
+  var payload = utils.extractPayload(request);
   crontab(deleteDirective, response, payload);
 });

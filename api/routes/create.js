@@ -1,4 +1,10 @@
-module.exports = (tab, response, payload) => {
+module.exports = (tab, response, payload) => {  
+  if (!payload.action || !payload.timing) {
+    response.send({
+      error: 'Insufficient parameters passed for create'
+    });
+  }
+
   const task = tab.create(payload.action, payload.timing);
   if (!task) {
     response.send({

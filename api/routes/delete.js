@@ -1,4 +1,10 @@
 module.exports = (tab, response, payload) => {
+  if (!payload.action) {
+    response.send({
+      error: 'Insufficient parameters passed for delete'
+    })
+  }
+
   tab.remove({ command: payload.action });
 
   tab.save((err) => {

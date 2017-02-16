@@ -10,6 +10,7 @@ const router = express.Router();
 
 // Import application specific helpers
 const crontab = require('./api/helpers/crontab');
+const utils = require('./api/helpers/utils');
 
 // Import route specific directives
 const loadDirective = require('./api/routes/load');
@@ -40,17 +41,7 @@ router.get('/load', (request, response) => {
   * @return Success message
   */
 router.post('/create', (request, response) => {
-  const payload = {};
-
-  payload.action = request.body.action;
-  payload.timing = request.body.timing;
-
-  if (!payload.action || !payload.timing) {
-    response.send({
-      error: 'Insufficient parameters passed for create'
-    });
-  }
-
+  const payload = utils.extractPayload(request);
   crontab(createDirective, response, payload);
 });
 
@@ -60,14 +51,6 @@ router.post('/create', (request, response) => {
   * @return Success message
   */
 router.post('/delete', (request, response) => {
-  const payload = {};
-
-  payload.action = request.body.action;
-  if (!payload.action) {
-    response.send({
-      error: 'Insufficient parameters passed for delete'
-    })
-  }
-
+  const payload = utils.extractPayload(request);
   crontab(deleteDirective, response, payload);
 });
