@@ -6,7 +6,7 @@
   "license": "MIT",
   "version": "0.0.1",
   "scripts": {
-    "watch:server": "babel api/server.js --watch --out-file server.js --presets=es2015"
+    "watch:server": "babel api --watch --out-file server.js --presets=es2015"
   },
   "dependencies": {
     "express": "~4.0.0",
@@ -20,7 +20,7 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-watch": "^2.0.6",
-    "node-cron": "1.1.3",
+    "crontab": "^1.1.3",
     "jquery": "^2.2.4",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
