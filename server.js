@@ -10,7 +10,8 @@ module.exports = function (directive, response) {
       directive(tab, response, payload);
     } else {
       response.send({
-        error: 'Failed to invoke crontab'
+        error: 'Failed to invoke crontab',
+        trace: err
       });
     }
   });
@@ -27,6 +28,10 @@ exports.extractPayload = function () {
   return payload;
 };
 'use strict';
+
+/**
+  * Directive for creating a new cron job
+  */
 
 module.exports = function (tab, response, payload) {
   if (!payload.action || !payload.timing) {
@@ -48,13 +53,18 @@ module.exports = function (tab, response, payload) {
         });
       } else {
         response.send({
-          error: 'Error saving crontab'
+          error: 'Error saving crontab',
+          trace: err
         });
       }
     });
   }
 };
 'use strict';
+
+/**
+  * Directive for deleting a cron job
+  */
 
 module.exports = function (tab, response, payload) {
   if (!payload.action) {
@@ -64,7 +74,6 @@ module.exports = function (tab, response, payload) {
   }
 
   tab.remove({ command: payload.action });
-
   tab.save(function (err) {
     if (!err) {
       response.send({
@@ -72,12 +81,17 @@ module.exports = function (tab, response, payload) {
       });
     } else {
       response.send({
-        error: 'Error deleting cron job'
+        error: 'Error deleting cron job',
+        trace: err
       });
     }
   });
 };
 "use strict";
+
+/**
+  * Directive for loading all crons
+  */
 
 module.exports = function (tab, response) {
   var jobs = tab.jobs();
@@ -123,7 +137,6 @@ console.log('Listening on ' + SERVER_PORT + '...');
 
 /**
   * Load all cron jobs for the current user
-  * TODO: Handle other users
   */
 router.get('/load', function (request, response) {
   crontab(loadDirective, response);

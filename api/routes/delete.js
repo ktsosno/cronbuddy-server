@@ -1,3 +1,7 @@
+/**
+  * Directive for deleting a cron job
+  */
+
 module.exports = (tab, response, payload) => {
   if (!payload.action) {
     response.send({
@@ -6,7 +10,6 @@ module.exports = (tab, response, payload) => {
   }
 
   tab.remove({ command: payload.action });
-
   tab.save((err) => {
     if (!err) {
       response.send({
@@ -14,7 +17,8 @@ module.exports = (tab, response, payload) => {
       });
     } else {
       response.send({
-        error: 'Error deleting cron job'
+        error: 'Error deleting cron job',
+        trace: err
       });
     }
   });

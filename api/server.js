@@ -28,7 +28,6 @@ console.log(`Listening on ${SERVER_PORT}...`);
 
 /**
   * Load all cron jobs for the current user
-  * TODO: Handle other users
   */
 router.get('/load', (request, response) => {
   crontab(loadDirective, response);

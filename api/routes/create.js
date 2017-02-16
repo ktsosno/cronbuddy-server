@@ -1,4 +1,8 @@
-module.exports = (tab, response, payload) => {  
+/**
+  * Directive for creating a new cron job
+  */
+
+module.exports = (tab, response, payload) => {
   if (!payload.action || !payload.timing) {
     response.send({
       error: 'Insufficient parameters passed for create'
@@ -18,7 +22,8 @@ module.exports = (tab, response, payload) => {
         });
       } else {
         response.send({
-          error: 'Error saving crontab'
+          error: 'Error saving crontab',
+          trace: err
         });
       }
     });

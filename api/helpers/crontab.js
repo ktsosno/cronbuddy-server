@@ -6,7 +6,8 @@ module.exports = (directive, response, payload = {}) => {
       directive(tab, response, payload);
     } else {
       response.send({
-        error: 'Failed to invoke crontab'
+        error: 'Failed to invoke crontab',
+        trace: err
       })
     }
   });
