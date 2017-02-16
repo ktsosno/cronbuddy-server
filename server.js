@@ -2,6 +2,12 @@
 
 var crontab = require('crontab');
 
+/**
+  * Directive for creating a new cron job
+  * @param directive {Function} The route directive (action) to be taken
+  * @param response {Object} The forwarded node response object
+  * @param payload {Object} Optional payload data for CRUD operations
+  */
 module.exports = function (directive, response) {
   var payload = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
@@ -111,7 +117,6 @@ module.exports = function (tab, response) {
   * CronBuddy
   * <ktsosno@gmail.com>
   */
-
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');

@@ -2,7 +2,6 @@
   * CronBuddy
   * <ktsosno@gmail.com>
   */
-
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
