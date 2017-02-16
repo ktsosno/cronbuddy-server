@@ -1,7 +1,7 @@
+
 /**
   * Directive for deleting a cron job
   */
-
 module.exports = (tab, response, payload) => {
   if (!payload.action) {
     response.send({

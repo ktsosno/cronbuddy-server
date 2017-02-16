@@ -1,7 +1,7 @@
+
 /**
   * Directive for creating a new cron job
   */
-
 module.exports = (tab, response, payload) => {
   if (!payload.action || !payload.timing) {
     response.send({

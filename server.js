@@ -38,7 +38,6 @@ exports.extractPayload = function () {
 /**
   * Directive for creating a new cron job
   */
-
 module.exports = function (tab, response, payload) {
   if (!payload.action || !payload.timing) {
     response.send({
@@ -71,7 +70,6 @@ module.exports = function (tab, response, payload) {
 /**
   * Directive for deleting a cron job
   */
-
 module.exports = function (tab, response, payload) {
   if (!payload.action) {
     response.send({
@@ -98,13 +96,13 @@ module.exports = function (tab, response, payload) {
 /**
   * Directive for loading all crons
   */
-
 module.exports = function (tab, response) {
   var jobs = tab.jobs();
   var parsedJobs = [];
 
   if (jobs.length > 0) {
     jobs.forEach(function (job) {
+      // TODO: More logical parsing of this
       parsedJobs.push(job.toString());
     });
   }
