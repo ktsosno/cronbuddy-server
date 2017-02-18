@@ -25,8 +25,9 @@ appRouter(router);
 username().then(username => {
   const serverPort = argv.p || 8080;
   const serverUser = argv.u || username;
+  const serverIP = argv.i || 'localhost';
 
-  app.listen(serverPort);
+  app.listen(serverPort, serverIP);
 
   global.username = serverUser;
   global.log = log;
@@ -34,4 +35,5 @@ username().then(username => {
   global.log.info('CronBuddy Server Running');
   global.log.info(`User: ${serverUser}`);
   global.log.info(`Port: ${serverPort}`);
+  global.log.info(`IP: ${serverIP}`);
 });

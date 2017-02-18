@@ -6,7 +6,7 @@
   "license": "MIT",
   "version": "0.0.1",
   "scripts": {
-    "watch:server": "babel app --watch --out-file out/server.js --presets=es2015,babili"
+    "watch:server": "babel app --watch --out-file server.js --presets=es2015,babili"
   },
   "dependencies": {
     "express": "~4.0.0",
