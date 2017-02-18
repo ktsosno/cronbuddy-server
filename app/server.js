@@ -28,8 +28,8 @@ username().then(username => {
   global.username = serverUser;
 
   console.log(`
-CronBuddy Server Running...
+  CronBuddy Server Running...
 
-User: ${serverUser}
-Port: ${serverPort}`);
+  User: ${serverUser}
+  Port: ${serverPort}`);
 });

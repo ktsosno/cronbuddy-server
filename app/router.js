@@ -1,3 +1,6 @@
+/**
+  * Router for application
+  */
 module.exports = (router) => {
   const crontab = require('../app/helpers/crontab');
   const utils = require('../app/helpers/utils');
