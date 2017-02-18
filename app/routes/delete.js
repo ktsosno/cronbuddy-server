@@ -1,4 +1,3 @@
-
 /**
   * Directive for deleting a cron job
   */

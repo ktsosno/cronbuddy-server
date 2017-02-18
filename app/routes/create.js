@@ -1,4 +1,3 @@
-
 /**
   * Directive for creating a new cron job
   */

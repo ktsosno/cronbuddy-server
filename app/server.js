@@ -2,54 +2,34 @@
   * CronBuddy Server
   * <ktsosno@gmail.com>
   */
+
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
+const username = require('username');
+const argv = require('minimist')(process.argv.slice(2));
+const appRouter = require('./app/router');
+
+const app = express();
 const router = express.Router();
-
-// Import application specific helpers
-const crontab = require('./app/helpers/crontab');
-const utils = require('./app/helpers/utils');
-
-// Import route specific directives
-const loadDirective = require('./app/routes/load');
-const createDirective = require('./app/routes/create');
-const deleteDirective = require('./app/routes/delete');
-
-const SERVER_PORT = 8080
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/app', router);
+app.use('/api', router);
 
-app.listen(SERVER_PORT);
-console.log(`CronBuddy
-Listening on ${SERVER_PORT}...`);
+// Register application routes
+appRouter(router);
 
-/**
-  * Load all cron jobs for the current user
-  */
-router.get('/load', (request, response) => {
-  crontab(loadDirective, response);
-});
+username().then(username => {
+  const serverPort = argv.p || 8080;
+  const serverUser = argv.u || username;
+  app.listen(serverPort);
 
-/**
-  * Create a new cron entry
-  * @param action {String} The script or command to create
-  * @param timing {String} The cron timing sequence
-  * @return Success message
-  */
-router.post('/create', (request, response) => {
-  const payload = utils.extractPayload(request);
-  crontab(createDirective, response, payload);
-});
+  // Used to invoke crontab on the same user as the node process
+  global.username = serverUser;
 
-/**
-  * Delete a cron entry
-  * @param action {String} The script or command to delete
-  * @return Success message
-  */
-router.post('/delete', (request, response) => {
-  const payload = utils.extractPayload(request);
-  crontab(deleteDirective, response, payload);
+  console.log(`
+CronBuddy Server Running...
+
+User: ${serverUser}
+Port: ${serverPort}`);
 });

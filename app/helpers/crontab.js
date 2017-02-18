@@ -1,5 +1,3 @@
-const crontab = require('crontab');
-
 /**
   * Directive for creating a new cron job
   * @param directive {Function} The route directive (action) to be taken
@@ -7,12 +5,14 @@ const crontab = require('crontab');
   * @param payload {Object} Optional payload data for CRUD operations
   */
 module.exports = (directive, response, payload = {}) => {
-  return crontab.load((err, tab) => {
+  const crontab = require('crontab');
+
+  return crontab.load(global.username, (err, tab) => {
     if (!err) {
       directive(tab, response, payload);
     } else {
       response.send({
-        error: 'Failed to invoke crontab',
+        error: `Failed to invoke crontab for '${global.username}'`,
         trace: err
       })
     }

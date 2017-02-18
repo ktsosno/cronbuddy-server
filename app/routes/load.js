@@ -1,4 +1,3 @@
-
 /**
   * Directive for loading all crons
   */
