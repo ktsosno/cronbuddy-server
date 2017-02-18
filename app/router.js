@@ -14,6 +14,8 @@ module.exports = (router) => {
     * @return Array of current jobs
     */
   router.get('/load', (request, response) => {
+    global.log.info('/load:request');
+
     crontab(loadDirective, response);
   });
 
@@ -25,6 +27,10 @@ module.exports = (router) => {
     */
   router.post('/create', (request, response) => {
     const payload = utils.extractPayload(request);
+
+    global.log.info('/create:request');
+    global.log.info(JSON.stringify(payload));
+
     crontab(createDirective, response, payload);
   });
 
@@ -35,6 +41,10 @@ module.exports = (router) => {
     */
   router.post('/delete', (request, response) => {
     const payload = utils.extractPayload(request);
+
+    global.log.info('/delete:request');
+    global.log.info(JSON.stringify(payload));
+
     crontab(deleteDirective, response, payload);
   });
 };

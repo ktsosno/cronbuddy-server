@@ -3,6 +3,9 @@
   * <ktsosno@gmail.com>
   */
 
+const log = require('minilog')('app');
+require('minilog').enable();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const username = require('username');
@@ -22,14 +25,13 @@ appRouter(router);
 username().then(username => {
   const serverPort = argv.p || 8080;
   const serverUser = argv.u || username;
+
   app.listen(serverPort);
 
-  // Used to invoke crontab on the same user as the node process
   global.username = serverUser;
+  global.log = log;
 
-  console.log(`
-  CronBuddy Server Running...
-
-  User: ${serverUser}
-  Port: ${serverPort}`);
+  global.log.info('CronBuddy Server Running');
+  global.log.info(`User: ${serverUser}`);
+  global.log.info(`Port: ${serverPort}`);
 });
