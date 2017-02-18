@@ -121,19 +121,19 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 
 // Import application specific helpers
-var crontab = require('./api/helpers/crontab');
-var utils = require('./api/helpers/utils');
+var crontab = require('./app/helpers/crontab');
+var utils = require('./app/helpers/utils');
 
 // Import route specific directives
-var loadDirective = require('./api/routes/load');
-var createDirective = require('./api/routes/create');
-var deleteDirective = require('./api/routes/delete');
+var loadDirective = require('./app/routes/load');
+var createDirective = require('./app/routes/create');
+var deleteDirective = require('./app/routes/delete');
 
 var SERVER_PORT = 8080;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/api', router);
+app.use('/app', router);
 
 app.listen(SERVER_PORT);
 console.log('Listening on ' + SERVER_PORT + '...');

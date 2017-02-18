@@ -1,5 +1,5 @@
 /**
-  * CronBuddy
+  * CronBuddy Server
   * <ktsosno@gmail.com>
   */
 const express = require('express');

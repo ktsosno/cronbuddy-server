@@ -1,6 +1,6 @@
 {
-  "name": "CronBuddy Server",
-  "description": "A lightweight interface for managing your crontab",
+  "name": "cronbuddy-server",
+  "description": "server repository for crontab management",
   "repository": "https://github.com/ktsosno/cronbuddy-server",
   "author": "Kyle Sosnowski",
   "license": "MIT",
@@ -14,9 +14,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.0.0",
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.22.0",
-    "crontab": "^1.1.3",
+    "crontab": "^1.1.3"
   }
 }
