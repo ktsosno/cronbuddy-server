@@ -1,6 +1,6 @@
 {
   "name": "cronbuddy-server",
-  "description": "server repository for crontab management",
+  "description": "server repository for CronBuddy's crontab management",
   "repository": "https://github.com/ktsosno/cronbuddy-server",
   "author": "Kyle Sosnowski",
   "license": "MIT",
