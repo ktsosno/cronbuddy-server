@@ -23,7 +23,8 @@ app.use(bodyParser.json());
 app.use('/app', router);
 
 app.listen(SERVER_PORT);
-console.log(`Listening on ${SERVER_PORT}...`);
+console.log(`CronBuddy
+Listening on ${SERVER_PORT}...`);
 
 /**
   * Load all cron jobs for the current user
