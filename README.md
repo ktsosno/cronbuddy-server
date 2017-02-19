@@ -1,5 +1,6 @@
 # CronBuddy
-The API server for management of your crontab via a simple UI.
+Manage your crons via a simple UI built on React and Node.  
+These APIs can be used by themselves or with [cronbuddy-web](https://github.com/ktsosno/cronbuddy-web).
 
 ### Development
 Initialize the `node_modules` directory with `npm install`.
@@ -15,8 +16,10 @@ node server.js -p=8181      // Specify the port for node server
 node server.js -u=myUser    // Specify which user's crontab to invoke
 ```
 
-Nginx Configuration
-Here is a sample Nginx configuration for running the node and react server in tandem. This also covers SSL and passwd authentication.
+### Nginx Configuration
+Here is a sample Nginx configuration for running the node and react server on the same host. 
+This also covers SSL and passwd authentication. This configuration forces a redirect to the SSL host on non-SSL requests.
+
 ```
 server {
         listen 80;
@@ -37,9 +40,6 @@ server {
 
         server_name <hostname>;
 
-        # Handle socket communication for react
-        add_header X-Frame-Options "SAMEORIGIN";
-
         # React Application
         location / {
                 auth_basic "Restrictred";
@@ -58,7 +58,9 @@ server {
         }
 
         # Node APIs
+        # This location must match your server.js definition
         location /api {
+                # API and Web need auth_basic to prevent direct API access
                 auth_basic "Restrictred";
                 auth_basic_user_file /etc/nginx/<password-location>
 
