@@ -15,7 +15,7 @@ node server.js -p=8181      // Specify the port for node server
 node server.js -u=myUser    // Specify which user's crontab to invoke
 ```
 
-Nginx Configuration
+### Nginx Configuration
 Here is a sample Nginx configuration for running the node and react server in tandem. This also covers SSL and passwd authentication.
 ```
 server {
