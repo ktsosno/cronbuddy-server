@@ -3,23 +3,36 @@
   * <ktsosno@gmail.com>
   */
 
+// Instantiate logger and globalize
 const log = require('minilog')('app');
 require('minilog').enable();
+global.log = log;
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const username = require('username');
 const argv = require('minimist')(process.argv.slice(2));
 
-// These context paths change on user (?), set for root
-const appRouter = require('./app/router');
-const appConfig = require('./app/config');
+// TODO: These context paths change on user (?), set for root for now
+const userRoute = './app';
+const appRouter = require(`${userRoute}/router`);
 
-const app = express();
-const router = express.Router();
+// TODO: Better way of handling application config?
+let appConfig = {
+  PORT: 9191,
+  USER: 'root'
+};
+try {
+    appConfig = require(`${userRoute}/config`);
+} catch(e) {
+    log.warn('No config found, using application defaults', e);
+}
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// This application is intended to have its
+// routing handled on the virtual host level
 app.use('/', router);
 
 // Register application routes
@@ -33,7 +46,6 @@ username().then(username => {
   app.listen(serverPort, serverIP);
 
   global.username = serverUser;
-  global.log = log;
 
   global.log.info('CronBuddy Server Running');
   global.log.info(`User: ${serverUser}`);
