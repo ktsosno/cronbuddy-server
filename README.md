@@ -58,7 +58,9 @@ server {
         }
 
         # Node APIs
+        # This location must match your server.js definition
         location /api {
+                # API and Web need auth_basic to prevent direct API access
                 auth_basic "Restrictred";
                 auth_basic_user_file /etc/nginx/<password-location>
 
