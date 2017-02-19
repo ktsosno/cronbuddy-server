@@ -1,4 +1,4 @@
-'use strict';module.exports={PORT:9191,USER:'kyle'};
+'use strict';module.exports={PORT:9191,USER:'root',PUSHOVER_KEY:'1234xyz4321',TWILIO_KEY:'1234xyz4321'};
 'use strict';var crontab=require('crontab');module.exports=function(a,b){var c=2<arguments.length&&arguments[2]!==void 0?arguments[2]:{};return crontab.load(global.username,function(d,e){d?b.send({error:'Failed to invoke crontab for \''+global.username+'\'',trace:d}):a(e,b,c)})};
 "use strict";exports.extractPayload=function(){var a=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{},b={};for(var c in a.body)b[c]=a.body[c];return b};
 'use strict';module.exports=function(a){var b=require('../app/helpers/crontab'),c=require('../app/helpers/utils'),d=require('../app/routes/load'),e=require('../app/routes/create'),f=require('../app/routes/delete');a.get('/load',function(g,h){global.log.info('/load:request'),b(d,h)}),a.post('/create',function(g,h){var i=c.extractPayload(g);global.log.info('/create:request'),global.log.info(JSON.stringify(i)),b(e,h,i)}),a.post('/delete',function(g,h){var i=c.extractPayload(g);global.log.info('/delete:request'),global.log.info(JSON.stringify(i)),b(f,h,i)})};
