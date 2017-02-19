@@ -8,6 +8,7 @@ module.exports = (tab, response, payload) => {
     });
   }
 
+  // TODO: Validate the cron job format
   const task = tab.create(payload.action, payload.timing);
   if (!task) {
     response.send({

@@ -34,6 +34,6 @@ module.exports = (tab, response) => {
       parsedJobs.push(parsedJob);
     });
   }
-
+  
   response.send({ jobs: parsedJobs });
 };
