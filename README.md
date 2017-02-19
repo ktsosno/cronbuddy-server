@@ -1,5 +1,5 @@
 # CronBuddy
-The API server for management of your crontab via a simple UI.
+Manage your crons via a simple UI built on React and Node.
 
 ### Development
 Initialize the `node_modules` directory with `npm install`.
