@@ -1,5 +1,5 @@
 # CronBuddy
-Manage your crons via a simple UI built on React and Node. These APIs can be used by themselves or with [cronbuddy-web]((https://github.com/ktsosno/cronbuddy-web).
+Manage your crons via a simple UI built on React and Node. These APIs can be used by themselves or with [cronbuddy-web](https://github.com/ktsosno/cronbuddy-web).
 
 ### Development
 Initialize the `node_modules` directory with `npm install`.
