@@ -17,31 +17,28 @@ const argv = require('minimist')(process.argv.slice(2));
 const userRoute = './app';
 const appRouter = require(`${userRoute}/router`);
 
-// TODO: Better way of handling application config?
-let appConfig = {
-  PORT: 9191,
-  USER: 'root'
-};
 try {
-    appConfig = require(`${userRoute}/config`);
+    const appConfig = require(`${userRoute}/config`);
 } catch(e) {
     log.warn('No config found, using application defaults', e);
+    const appConfig = {
+      PORT: 9191,
+      USER: 'root'
+    };
 }
 
+const app = express();
+const router = express.Router();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// This application is intended to have its
-// routing handled on the virtual host level
 app.use('/', router);
 
-// Register application routes
 appRouter(router);
 
 username().then(username => {
   const serverPort = argv.p || appConfig.PORT;
   const serverUser = argv.u || appConfig.USER;
-  const serverIP = argv.i || 'localhost';
+  const serverIP = argv.i || '127.0.0.1';
 
   app.listen(serverPort, serverIP);
 

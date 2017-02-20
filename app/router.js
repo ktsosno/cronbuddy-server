@@ -14,7 +14,7 @@ module.exports = (router) => {
     * @return Array of current jobs
     */
   router.get('/load', (request, response) => {
-    global.log.info('/load:request');
+    global.log.info('request:/load');
 
     crontab(loadDirective, response);
   });
@@ -28,7 +28,7 @@ module.exports = (router) => {
   router.post('/create', (request, response) => {
     const payload = utils.extractPayload(request);
 
-    global.log.info('/create:request');
+    global.log.info('request:/create');
     global.log.info(JSON.stringify(payload));
 
     crontab(createDirective, response, payload);
@@ -42,9 +42,23 @@ module.exports = (router) => {
   router.post('/delete', (request, response) => {
     const payload = utils.extractPayload(request);
 
-    global.log.info('/delete:request');
+    global.log.info('request:/delete');
     global.log.info(JSON.stringify(payload));
 
     crontab(deleteDirective, response, payload);
+  });
+
+  /**
+    * Edit an existing crontab entry
+    * @param id {Integer} The ID of the cron being edited
+    * @return Success message
+    */
+  router.post('/delete', (request, response) => {
+    const payload = utils.extractPayload(request);
+
+    global.log.info('request:/edit');
+    global.log.info(JSON.stringify(payload));
+
+    crontab(editDirective, response, payload);
   });
 };
