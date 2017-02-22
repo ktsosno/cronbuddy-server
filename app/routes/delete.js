@@ -15,7 +15,7 @@ module.exports = (tab, response, payload) => {
     });
   }
 
-  tab.save((err) => {
+  tab.save(err => {
     if (!err) {
       return response.send({
         message: 'Cron job successfully deleted'

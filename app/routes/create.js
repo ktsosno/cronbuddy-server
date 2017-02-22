@@ -8,23 +8,18 @@ module.exports = (tab, response, payload) => {
     });
   }
 
-  // Verify that this action doesn't exist before creating
   const action = payload.action;
   const jobs =  tab.jobs();
 
-  let isDuplicate = false;
   jobs.forEach(job => {
     if (job.command() === action) {
-      isDuplicate = true;
-      return false;
+      // No reasonable situation where you'd make the same
+      // job with multiple timings
+      return response.send({
+        error: 'Attempting to create duplicate job'
+      });
     };
   });
-
-  if (isDuplicate) {
-    return response.send({
-      error: 'Attempting to create duplicate job'
-    });
-  }
 
   const task = tab.create(payload.action, payload.timing);
   if (!task) {
