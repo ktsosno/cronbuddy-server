@@ -2,23 +2,20 @@
   * Router for application
   */
 module.exports = (router) => {
-  const DIRECTIVE_PATH = '../app/routes';
-  const HELPER_PATH = '../app/helpers';
+  // TODO: ESLint Trips
+  const crontab = require('../app/helpers/crontab');
+  const utils = require('../app/helpers/utils');
 
-  const crontab = require(`${HELPER_PATH}/crontab`);
-  const utils = require(`${HELPER_PATH}/utils`);
-
-  const loadDirective = require(`${DIRECTIVE_PATH}/load`);
-  const createDirective = require(`${DIRECTIVE_PATH}/create`);
-  const deleteDirective = require(`${DIRECTIVE_PATH}/delete`);
-  const editDirective = require(`${DIRECTIVE_PATH}/edit`);
+  const loadDirective = require('../app/routes/load');
+  const createDirective = require('../app/routes/create');
+  const deleteDirective = require('../app/routes/delete');
+  const editDirective = require('../app/routes/edit');
 
   /**
     * Load all cron jobs for the current user
     * @return Array of current jobs
     */
   router.get('/load', (request, response) => {
-
     if (global.log) {
       global.log.info('request:/load');
     }

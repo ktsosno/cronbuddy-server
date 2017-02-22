@@ -4,9 +4,9 @@
   * @return extracted payload from request body
   */
 exports.extractPayload = (request = {}) => {
-  const payload = {}
-  for (let x in request.body) {
-    payload[x] = request.body[x];
-  }
+  const payload = {};
+
+  Object.assign(payload, request.body);
+
   return payload;
-}
+};

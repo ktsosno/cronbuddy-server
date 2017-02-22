@@ -8,14 +8,16 @@ const crontab = require('crontab');
   */
 module.exports = (directive, response, payload = {}) => {
   // TODO: Username should be able to be sent from the web
-  return crontab.load(global.username, (err, tab) => {
+  const loadedCrontab = crontab.load(global.username, (err, tab) => {
     if (!err) {
       directive(tab, response, payload);
     } else {
-      return response.send({
+      response.send({
         error: `Failed to invoke crontab for '${global.username}'`,
-        trace: err
-      })
+        trace: err,
+      });
     }
   });
-}
+
+  return loadedCrontab;
+};
