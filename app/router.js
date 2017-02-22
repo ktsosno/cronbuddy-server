@@ -1,16 +1,14 @@
+const crontab = require('app/helpers/crontab');
+const utils = require('app/helpers/utils');
+const loadDirective = require('app/routes/load');
+const createDirective = require('app/routes/create');
+const deleteDirective = require('app/routes/delete');
+const editDirective = require('app/routes/edit');
+
 /**
   * Router for application
   */
 module.exports = (router) => {
-  // TODO: ESLint Trips
-  const crontab = require('../app/helpers/crontab');
-  const utils = require('../app/helpers/utils');
-
-  const loadDirective = require('../app/routes/load');
-  const createDirective = require('../app/routes/create');
-  const deleteDirective = require('../app/routes/delete');
-  const editDirective = require('../app/routes/edit');
-
   /**
     * Load all cron jobs for the current user
     * @return Array of current jobs

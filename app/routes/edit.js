@@ -21,11 +21,11 @@ module.exports = (tab, response, payload) => {
   } else {
     tab.save((err, tab) => {
       if(!err) {
-        return response.send({
+        response.send({
           message: 'Job successfully edited'
         });
       } else {
-        return response.send({
+        response.send({
           error: 'Error saving crontab',
           trace: err
         });
