@@ -5,26 +5,25 @@
 
 const log = require('minilog')('app');
 require('minilog').enable();
+
 global.log = log;
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const username = require('username');
 const argv = require('minimist')(process.argv.slice(2));
+const appRouter = require('./app/router');
 
-// TODO: These context paths change on user (?), set for root for now
-const userRoute = './app';
-const appRouter = require(`${userRoute}/router`);
-
+// TODO: ESLint doesn't like a method based require
 let appConfig = {};
 try {
-    appConfig = require(`${userRoute}/config`);
-} catch(e) {
-    log.warn('No config found, using application defaults', e);
-    appConfig = {
-      PORT: 9191,
-      USER: 'root'
-    };
+  appConfig = require('./app/config');
+} catch (e) {
+  log.warn('No config found, using application defaults', e);
+  appConfig = {
+    PORT: 9191,
+    USER: 'root',
+  };
 }
 
 const app = express();
@@ -35,7 +34,7 @@ app.use('/', router);
 
 appRouter(router);
 
-username().then(username => {
+username().then((username) => {
   const serverPort = argv.p || appConfig.PORT;
   const serverUser = argv.u || appConfig.USER;
   const serverIP = argv.i || '127.0.0.1';
@@ -45,7 +44,8 @@ username().then(username => {
   global.username = serverUser;
 
   global.log.info('CronBuddy Server Running');
-  global.log.info(`User: ${serverUser}`);
+  global.log.info(`Cron User: ${serverUser}`);
+  global.log.info(`Node User: ${username}`);
   global.log.info(`Port: ${serverPort}`);
   global.log.info(`IP: ${serverIP}`);
 });
