@@ -8,6 +8,7 @@ module.exports = (router) => {
   const loadDirective = require('../app/routes/load');
   const createDirective = require('../app/routes/create');
   const deleteDirective = require('../app/routes/delete');
+  const editDirective = require('../app/routes/edit');
 
   /**
     * Load all cron jobs for the current user
@@ -53,7 +54,7 @@ module.exports = (router) => {
     * @param id {Integer} The ID of the cron being edited
     * @return Success message
     */
-  router.post('/delete', (request, response) => {
+  router.post('/edit', (request, response) => {
     const payload = utils.extractPayload(request);
 
     global.log.info('request:/edit');

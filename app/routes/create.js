@@ -12,7 +12,8 @@ module.exports = (tab, response, payload) => {
   const task = tab.create(payload.action, payload.timing);
   if (!task) {
     response.send({
-      error: 'Failed to create new job'
+      error: 'Failed to create new job',
+      task
     });
   } else {
     tab.save((err, tab) => {

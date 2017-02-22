@@ -8,7 +8,13 @@ module.exports = (tab, response, payload) => {
     })
   }
 
-  tab.remove({ command: payload.action });
+  const didRemove = tab.remove({ command: payload.action });
+  if (!didRemove) {
+    response.send({
+      message: 'Failed to remove cron job'
+    });
+  }
+  
   tab.save((err) => {
     if (!err) {
       response.send({

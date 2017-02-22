@@ -17,11 +17,12 @@ const argv = require('minimist')(process.argv.slice(2));
 const userRoute = './app';
 const appRouter = require(`${userRoute}/router`);
 
+let appConfig = {};
 try {
-    const appConfig = require(`${userRoute}/config`);
+    appConfig = require(`${userRoute}/config`);
 } catch(e) {
     log.warn('No config found, using application defaults', e);
-    const appConfig = {
+    appConfig = {
       PORT: 9191,
       USER: 'root'
     };

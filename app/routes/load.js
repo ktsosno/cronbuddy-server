@@ -4,12 +4,17 @@ const later = require('later');
   * Directive for loading all crons
   */
 module.exports = (tab, response) => {
-  const jobs = tab.jobs();
   const parsedJobs = [];
+  const jobs = tab.jobs();
 
   if (jobs.length > 0) {
     jobs.forEach((job) => {
-      // We can be smarter about this
+      if (!job.isValid()) {
+        global.log.warn('Invalid job found in crontab');
+      }
+
+      // We can be smarter about this, null values returned on
+      // direct function access, e.g. job.second();
       let jobArr = job.toString().split(' ');
       let timingArr = jobArr.slice(0,5);
       let timingStr = timingArr.join(' ');
@@ -34,6 +39,6 @@ module.exports = (tab, response) => {
       parsedJobs.push(parsedJob);
     });
   }
-  
+
   response.send({ jobs: parsedJobs });
 };
