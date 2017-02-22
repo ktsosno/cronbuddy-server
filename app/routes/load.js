@@ -8,17 +8,18 @@ module.exports = (tab, response) => {
   const jobs = tab.jobs();
 
   if (jobs.length > 0) {
-    jobs.forEach((job) => {
+    jobs.forEach(job => {
       if (!job.isValid()) {
         global.log.warn('Invalid job found in crontab');
       }
 
       // We can be smarter about this, null values returned on
       // direct function access, e.g. job.second();
+      // TODO: investigate the bad return values
       let jobArr = job.toString().split(' ');
       let timingArr = jobArr.slice(0,5);
       let timingStr = timingArr.join(' ');
-      let action = jobArr.slice(5).join(' ');
+      let action = job.command();
 
       // Construct more useable job object
       const parsedJob = {
@@ -26,12 +27,11 @@ module.exports = (tab, response) => {
         timing: {
           fullString: timingStr,
           values: {
-            dayOfWeek: timingArr[0],
+            dow: timingArr[0],
             month: timingArr[1],
-            dayOfMonth: timingArr[2],
+            dom: timingArr[2],
             hour: timingArr[3],
-            minute: timingArr[4],
-            second: timingArr[5]
+            minute: timingArr[4]
           }
         }
       };

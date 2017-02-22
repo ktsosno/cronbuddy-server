@@ -3,7 +3,7 @@
   */
 module.exports = (tab, response, payload) => {
   if (!payload.action) {
-    response.send({
+    return response.send({
       error: 'Insufficient parameters passed for edit'
     });
   }
@@ -14,18 +14,18 @@ module.exports = (tab, response, payload) => {
   const job = tab.create(payload.action, payload.timing);
 
   if (!job) {
-    response.send({
+    return response.send({
       error: 'Failed to edit job',
       job
     });
   } else {
     tab.save((err, tab) => {
       if(!err) {
-        response.send({
+        return response.send({
           message: 'Job successfully edited'
         });
       } else {
-        response.send({
+        return response.send({
           error: 'Error saving crontab',
           trace: err
         });

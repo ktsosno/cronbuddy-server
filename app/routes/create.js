@@ -3,26 +3,43 @@
   */
 module.exports = (tab, response, payload) => {
   if (!payload.action || !payload.timing) {
-    response.send({
+    return response.send({
       error: 'Insufficient parameters passed for create'
     });
   }
 
-  // TODO: Validate the cron job format
+  // Verify that this action doesn't exist before creating
+  const action = payload.action;
+  const jobs =  tab.jobs();
+
+  let isDuplicate = false;
+  jobs.forEach(job => {
+    if (job.command() === action) {
+      isDuplicate = true;
+      return false;
+    };
+  });
+
+  if (isDuplicate) {
+    return response.send({
+      error: 'Attempting to create duplicate job'
+    });
+  }
+
   const task = tab.create(payload.action, payload.timing);
   if (!task) {
-    response.send({
+    return response.send({
       error: 'Failed to create new job',
       task
     });
   } else {
     tab.save((err, tab) => {
       if(!err) {
-        response.send({
+        return response.send({
           message: 'Job successfully created'
         });
       } else {
-        response.send({
+        return response.send({
           error: 'Error saving crontab',
           trace: err
         });

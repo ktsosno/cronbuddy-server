@@ -3,7 +3,7 @@
   * <ktsosno@gmail.com>
   */
 
-// Instantiate logger and globalize
+
 const log = require('minilog')('app');
 require('minilog').enable();
 global.log = log;
