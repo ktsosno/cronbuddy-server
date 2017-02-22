@@ -10,10 +10,25 @@ Run `npm run watch:server` in the application root to watch the development fold
 Start the server with root access:
 `sudo node server.js`
 
-Options
+#### Options
+The recommended way is to create a configuration file at `app/config.js`. This contains your chosen port, crontab user, [Pushover](https://pushover.net/) api token, and [Twilio](https://www.twilio.com/) API key.
+
+Example config:
 ```
-node server.js -p=8181      // Specify the port for node server
-node server.js -u=myUser    // Specify which user's crontab to invoke
+module.exports = {
+  PORT: 9191,                    // Default if no config created
+  USER: 'root',                  // Default if no config created
+  PUSHOVER_KEY: '1234xyz4321',
+  TWILIO_KEY: '1234xyz4321'
+};
+```
+
+You can also override some of the configurations with the command line:
+```
+node server.js 
+        -p=8181         // Specify the port for node server
+        -u=myUser       // Specify which user's crontab to invoke, default `whoami`
+        -i=127.0.0.1    // Override the 
 ```
 
 ### Nginx Configuration
