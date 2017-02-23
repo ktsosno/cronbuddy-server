@@ -8,11 +8,20 @@ module.exports = (tab, response, payload) => {
     });
   }
 
+  const action = payload.action;
+  const timing = payload.timing;
+
   // Delete and re-add
   // TODO: Pull request into crontab to return delete success
-  tab.remove({ command: payload.action });
-  const job = tab.create(payload.action, payload.timing);
+  const removedJob = tab.remove({ command: action });
+  if (!removedJob) {
+    response.send({
+      error: 'Unable to find job to edit',
+    });
+    return false;
+  }
 
+  const job = tab.create(action, timing);
   if (!job) {
     return response.send({
       error: 'Failed to edit job',
