@@ -4,7 +4,7 @@
 module.exports = (tab, response, payload) => {
   if (!payload.action) {
     return response.send({
-      error: 'Insufficient parameters passed for edit'
+      error: 'Insufficient parameters passed for edit',
     });
   }
 
@@ -16,21 +16,20 @@ module.exports = (tab, response, payload) => {
   if (!job) {
     return response.send({
       error: 'Failed to edit job',
-      job
-    });
-  } else {
-    tab.save((err, tab) => {
-      if(!err) {
-        response.send({
-          message: 'Job successfully edited'
-        });
-      } else {
-        response.send({
-          error: 'Error saving crontab',
-          trace: err
-        });
-      }
+      job,
     });
   }
 
+  return tab.save((err) => {
+    if (!err) {
+      response.send({
+        message: 'Job successfully edited',
+      });
+    } else {
+      response.send({
+        error: 'Error saving crontab',
+        trace: err,
+      });
+    }
+  });
 };

@@ -34,7 +34,7 @@ app.use('/', router);
 
 appRouter(router);
 
-username().then((username) => {
+username().then((nodeUser) => {
   const serverPort = argv.p || appConfig.PORT;
   const serverUser = argv.u || appConfig.USER;
   const serverIP = argv.i || '127.0.0.1';
@@ -45,7 +45,7 @@ username().then((username) => {
 
   global.log.info('CronBuddy Server Running');
   global.log.info(`Cron User: ${serverUser}`);
-  global.log.info(`Node User: ${username}`);
+  global.log.info(`Node User: ${nodeUser}`);
   global.log.info(`Port: ${serverPort}`);
   global.log.info(`IP: ${serverIP}`);
 });

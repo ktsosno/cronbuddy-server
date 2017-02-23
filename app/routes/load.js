@@ -1,5 +1,3 @@
-const later = require('later');
-
 /**
   * Directive for loading all crons
   */
@@ -8,7 +6,7 @@ module.exports = (tab, response) => {
   const jobs = tab.jobs();
 
   if (jobs.length > 0) {
-    jobs.forEach(job => {
+    jobs.forEach((job) => {
       if (!job.isValid()) {
         global.log.warn('Invalid job found in crontab');
       }
@@ -16,10 +14,10 @@ module.exports = (tab, response) => {
       // We can be smarter about this, null values returned on
       // direct function access, e.g. job.second();
       // TODO: investigate the bad return values
-      let jobArr = job.toString().split(' ');
-      let timingArr = jobArr.slice(0,5);
-      let timingStr = timingArr.join(' ');
-      let action = job.command();
+      const jobArr = job.toString().split(' ');
+      const timingArr = jobArr.slice(0, 5);
+      const timingStr = timingArr.join(' ');
+      const action = job.command();
 
       // Construct more useable job object
       const parsedJob = {
@@ -31,9 +29,9 @@ module.exports = (tab, response) => {
             month: timingArr[1],
             dom: timingArr[2],
             hour: timingArr[3],
-            minute: timingArr[4]
-          }
-        }
+            minute: timingArr[4],
+          },
+        },
       };
 
       parsedJobs.push(parsedJob);
