@@ -4,6 +4,7 @@ const loadDirective = require('app/routes/load');
 const createDirective = require('app/routes/create');
 const deleteDirective = require('app/routes/delete');
 const editDirective = require('app/routes/edit');
+const pauseDirective = require('app/routes/pause');
 
 /**
   * Router for application
@@ -68,5 +69,16 @@ module.exports = (router) => {
     }
 
     crontab(editDirective, response, payload);
+  });
+
+  /**
+    * Edit an existing crontab entry
+    * @param id {Integer} The ID of the cron being edited
+    * @return Success message
+    */
+  router.post('/pause', (request, response) => {
+    const payload = utils.extractPayload(request);
+
+    crontab(pauseDirective, response, payload);
   });
 };

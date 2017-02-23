@@ -32,7 +32,6 @@ module.exports = (tab, response, payload) => {
   if (!task) {
     return response.send({
       error: 'Failed to create new job',
-      task,
     });
   }
 
