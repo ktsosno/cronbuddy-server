@@ -9,16 +9,23 @@ module.exports = (tab, response, payload) => {
   }
 
   const { action, timing } = payload;
-  const jobs = tab.jobs();
+  const checkDupilcate = (jobSet) => {
+    let isDuplicate = false;
+    jobSet.forEach((job) => {
+      if (job.command() === action) {
+        isDuplicate = true;
+      }
+    });
+    return isDuplicate;
+  }
 
-  let isDuplicate = false;
-  jobs.forEach((job) => {
-    if (job.command() === action) {
-      // No reasonable situation where you'd make the same
-      // job with multiple timings
-      isDuplicate = true;
-    }
-  });
+  const jobs = tab.jobs();
+  const pausedJobs = tab.pausedJobs();
+
+  const jobSet = jobs.concat(pausedJobs);
+
+  console.log(jobSet);
+  const isDuplicate = checkDupilcate(jobSet);
 
   if (isDuplicate) {
     response.send({
