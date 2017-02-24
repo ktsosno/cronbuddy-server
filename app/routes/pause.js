@@ -1,9 +1,8 @@
 const { formatJob } = require('app/helpers/utils');
 
 /**
-  * Directive for loading all crons
+  * Directive for loading all paused crons
   */
-
 module.exports = (tab, response, payload) => {
   const pausedJobs = tab.pausedJobs();
   const allJobs = tab.jobs();
