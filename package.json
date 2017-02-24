@@ -4,7 +4,7 @@
   "repository": "https://github.com/ktsosno/cronbuddy-server",
   "author": "Kyle Sosnowski",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "scripts": {
     "watch:eslint": "esw --watch app/",
     "watch:server": "babel app --watch --out-file server.js --presets=es2015,babili",
