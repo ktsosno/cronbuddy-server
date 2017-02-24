@@ -5,7 +5,6 @@
 
 const log = require('minilog')('app');
 require('minilog').enable();
-
 global.log = log;
 
 const express = require('express');

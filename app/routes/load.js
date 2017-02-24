@@ -16,10 +16,6 @@ module.exports = (tab, response, payload) => {
 
   if (jobs.length > 0) {
     jobs.forEach((job) => {
-      if (!job.isValid()) {
-        global.log.warn('Invalid job found in crontab');
-      }
-
       parsedJobs.push(formatJob(job));
     });
   }

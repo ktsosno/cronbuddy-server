@@ -4,7 +4,8 @@
 module.exports = (tab, response, payload) => {
   if (!payload.action) {
     return response.send({
-      error: 'Insufficient parameters passed for delete',
+      message: 'Insufficient parameters passed for delete',
+      success: false,
     });
   }
 
@@ -12,6 +13,7 @@ module.exports = (tab, response, payload) => {
   if (!didRemove) {
     return response.send({
       message: 'Failed to remove cron job',
+      success: false,
     });
   }
 
@@ -19,10 +21,12 @@ module.exports = (tab, response, payload) => {
     if (!err) {
       response.send({
         message: 'Cron job successfully deleted',
+        success: true,
       });
     } else {
       response.send({
-        error: 'Error deleting cron job',
+        message: 'Error deleting cron job',
+        success: false,
         trace: err,
       });
     }

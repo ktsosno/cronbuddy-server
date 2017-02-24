@@ -4,7 +4,8 @@
 module.exports = (tab, response, payload) => {
   if (!payload.action || !payload.timing) {
     return response.send({
-      error: 'Insufficient parameters passed for create',
+      message: 'Insufficient parameters passed for create',
+      success: false,
     });
   }
 
@@ -25,7 +26,8 @@ module.exports = (tab, response, payload) => {
 
   if (isDuplicate) {
     response.send({
-      error: 'Attempting to create duplicate job',
+      message: 'Attempting to create duplicate job',
+      success: false,
     });
     return false;
   }
@@ -33,7 +35,8 @@ module.exports = (tab, response, payload) => {
   const task = tab.create(action, timing);
   if (!task) {
     return response.send({
-      error: 'Failed to create new job',
+      message: 'Failed to create new job',
+      success: false,
     });
   }
 
@@ -41,10 +44,12 @@ module.exports = (tab, response, payload) => {
     if (!err) {
       response.send({
         message: 'Job successfully created',
+        success: true,
       });
     } else {
       response.send({
-        error: 'Error saving crontab',
+        message: 'Error saving crontab',
+        success: false,
         trace: err,
       });
     }

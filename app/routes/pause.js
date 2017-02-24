@@ -23,7 +23,8 @@ module.exports = (tab, response, payload) => {
 
   if (!action) {
     response.send({
-      error: 'Insufficient parameters passed for pause',
+      message: 'Insufficient parameters passed for pause',
+      success: false,
     });
     return false;
   }
@@ -38,7 +39,8 @@ module.exports = (tab, response, payload) => {
     tab.pauseJob(activeJob);
   } else {
     response.send({
-      error: 'No matching paused or active jobs found',
+      message: 'No matching paused or active jobs found',
+      success: false,
     });
     return false;
   }
@@ -47,10 +49,12 @@ module.exports = (tab, response, payload) => {
     if (!err) {
       response.send({
         message: 'Contab successfully updated',
+        success: true,
       });
     } else {
       response.send({
-        error: 'Error saving crontab',
+        message: 'Error saving crontab',
+        success: false,
         trace: err,
       });
     }
