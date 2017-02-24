@@ -1,10 +1,10 @@
 const crontab = require('app/helpers/crontab');
-const utils = require('app/helpers/utils');
 const loadDirective = require('app/routes/load');
 const createDirective = require('app/routes/create');
 const deleteDirective = require('app/routes/delete');
 const editDirective = require('app/routes/edit');
 const pauseDirective = require('app/routes/pause');
+const { extractPayload } = require('app/helpers/utils');
 
 /**
   * Router for application
@@ -29,7 +29,7 @@ module.exports = (router) => {
     * @return Success message
     */
   router.post('/create', (request, response) => {
-    const payload = utils.extractPayload(request);
+    const payload = extractPayload(request);
 
     if (global.lob) {
       global.log.info('request:/create');
@@ -45,7 +45,7 @@ module.exports = (router) => {
     * @return Success message
     */
   router.post('/delete', (request, response) => {
-    const payload = utils.extractPayload(request);
+    const payload = extractPayload(request);
 
     if (global.lob) {
       global.log.info('request:/delete');
@@ -61,7 +61,7 @@ module.exports = (router) => {
     * @return Success message
     */
   router.post('/edit', (request, response) => {
-    const payload = utils.extractPayload(request);
+    const payload = extractPayload(request);
 
     if (global.lob) {
       global.log.info('request:/edit');
@@ -77,7 +77,12 @@ module.exports = (router) => {
     * @return Success message
     */
   router.post('/pause', (request, response) => {
-    const payload = utils.extractPayload(request);
+    const payload = extractPayload(request);
+
+    if (global.lob) {
+      global.log.info('request:/pause');
+      global.log.info(JSON.stringify(payload));
+    }
 
     crontab(pauseDirective, response, payload);
   });

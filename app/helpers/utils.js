@@ -10,3 +10,29 @@ exports.extractPayload = (request = {}) => {
 
   return payload;
 };
+
+
+exports.formatJob = (job) => {
+  if(job === null || !job.isValid()) {
+    return {};
+  }
+
+  const jobArr = job.toString().split(' ');
+  const timingArr = jobArr.slice(0, 5);
+  const timingStr = timingArr.join(' ');
+  const action = job.command();
+
+  return {
+    action,
+    timing: {
+      fullString: timingStr,
+      values: {
+        dow: timingArr[0],
+        month: timingArr[1],
+        dom: timingArr[2],
+        hour: timingArr[3],
+        minute: timingArr[4],
+      },
+    },
+  }
+};
