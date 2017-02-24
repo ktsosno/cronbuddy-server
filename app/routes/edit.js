@@ -8,10 +8,9 @@ module.exports = (tab, response, payload) => {
     });
   }
 
-  const action = payload.action;
-  const timing = payload.timing;
-
+  const { action, timing } = payload;
   const removedJob = tab.remove({ command: action });
+
   if (!removedJob) {
     response.send({
       error: 'Unable to find job to edit',
@@ -20,6 +19,7 @@ module.exports = (tab, response, payload) => {
   }
 
   const job = tab.create(action, timing);
+  
   if (!job) {
     return response.send({
       error: 'Failed to edit job',

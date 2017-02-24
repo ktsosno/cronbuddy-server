@@ -8,8 +8,7 @@ module.exports = (tab, response, payload) => {
     });
   }
 
-  const action = payload.action;
-  const timing = payload.timing;
+  const { action, timing } = payload;
   const jobs = tab.jobs();
 
   let isDuplicate = false;
