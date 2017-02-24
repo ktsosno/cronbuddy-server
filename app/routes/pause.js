@@ -8,7 +8,6 @@ module.exports = (tab, response, payload) => {
   const pausedJobs = tab.pausedJobs();
   const allJobs = tab.jobs();
   const action = payload.action;
-  let targetJob;
 
   const extractFormattedJob = (jobSet) => {
     if (jobSet.length === 0) {
@@ -19,8 +18,9 @@ module.exports = (tab, response, payload) => {
       if (job.command() === action) {
         return formatJob(job);
       }
+      return false;
     });
-  }
+  };
 
   if (!action) {
     response.send({
@@ -39,7 +39,7 @@ module.exports = (tab, response, payload) => {
     tab.pauseJob(activeJob);
   } else {
     response.send({
-      error: 'No matching paused or active jobs found'
+      error: 'No matching paused or active jobs found',
     });
     return false;
   }

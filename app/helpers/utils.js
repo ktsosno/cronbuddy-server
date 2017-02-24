@@ -13,7 +13,7 @@ exports.extractPayload = (request = {}) => {
 
 
 exports.formatJob = (job) => {
-  if(job === null || !job.isValid()) {
+  if (job === null || !job.isValid()) {
     return {};
   }
 
@@ -34,5 +34,5 @@ exports.formatJob = (job) => {
         minute: timingArr[4],
       },
     },
-  }
+  };
 };

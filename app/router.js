@@ -72,8 +72,8 @@ module.exports = (router) => {
   });
 
   /**
-    * Edit an existing crontab entry
-    * @param id {Integer} The ID of the cron being edited
+    * Pause or activate a cron
+    * @param action {String} The command
     * @return Success message
     */
   router.post('/pause', (request, response) => {
