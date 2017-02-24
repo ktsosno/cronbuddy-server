@@ -12,14 +12,19 @@ const { extractPayload } = require('app/helpers/utils');
 module.exports = (router) => {
   /**
     * Load all cron jobs for the current user
+    * @param type {String} The type of jobs to load (active|paused)
     * @return Array of current jobs
     */
   router.get('/load', (request, response) => {
+    // TODO: Add extractQuery method to get query param requests
+    const payload = extractPayload(request);
+
     if (global.log) {
       global.log.info('request:/load');
+      global.log.info(JSON.stringify(payload));
     }
 
-    crontab(loadDirective, response);
+    crontab(loadDirective, response, payload);
   });
 
   /**

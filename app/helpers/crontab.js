@@ -7,8 +7,9 @@ const crontab = require('crontab');
   * @param payload {Object} Optional payload data for CRUD operations
   */
 module.exports = (directive, response, payload = {}) => {
-  // TODO: Username should be able to be sent from the web
-  const loadedCrontab = crontab.load(global.username, (err, tab) => {
+  // Use a passed in user for a specific tab, or fallback to the config
+  const username = payload.username || global.username;
+  const loadedCrontab = crontab.load(username, (err, tab) => {
     if (!err) {
       directive(tab, response, payload);
     } else {

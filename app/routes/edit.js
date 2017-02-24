@@ -11,8 +11,6 @@ module.exports = (tab, response, payload) => {
   const action = payload.action;
   const timing = payload.timing;
 
-  // Delete and re-add
-  // TODO: Pull request into crontab to return delete success
   const removedJob = tab.remove({ command: action });
   if (!removedJob) {
     response.send({

@@ -14,7 +14,6 @@ const username = require('username');
 const argv = require('minimist')(process.argv.slice(2));
 const appRouter = require('./app/router');
 
-// TODO: ESLint doesn't like a method based require
 let appConfig = {};
 try {
   appConfig = require('./app/config');

@@ -6,11 +6,14 @@
 exports.extractPayload = (request = {}) => {
   const payload = {};
 
-  Object.assign(payload, request.body);
+  if (request.method === 'GET') {
+    Object.assign(payload, request.query);
+  } else {
+    Object.assign(payload, request.body);
+  }
 
   return payload;
 };
-
 
 exports.formatJob = (job) => {
   if (job === null || !job.isValid()) {
