@@ -17,15 +17,11 @@ module.exports = (tab, response, payload) => {
       }
     });
     return isDuplicate;
-  }
+  };
 
   const jobs = tab.jobs();
   const pausedJobs = tab.pausedJobs();
-
-  const jobSet = jobs.concat(pausedJobs);
-
-  console.log(jobSet);
-  const isDuplicate = checkDupilcate(jobSet);
+  const isDuplicate = checkDupilcate(jobs.concat(pausedJobs));
 
   if (isDuplicate) {
     response.send({

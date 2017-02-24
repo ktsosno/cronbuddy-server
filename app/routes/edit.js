@@ -19,7 +19,7 @@ module.exports = (tab, response, payload) => {
   }
 
   const job = tab.create(action, timing);
-  
+
   if (!job) {
     return response.send({
       error: 'Failed to edit job',
