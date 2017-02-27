@@ -84,7 +84,7 @@ module.exports = (router) => {
   router.post('/pause', (request, response) => {
     const payload = extractPayload(request);
 
-    if (global.lob) {
+    if (global.log) {
       global.log.info('request:/pause');
       global.log.info(JSON.stringify(payload));
     }
