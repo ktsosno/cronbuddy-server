@@ -1,5 +1,5 @@
 # CronBuddy
-NodeJS APIs for turning a crontab into a structured data store. Create, edit, delete and pause cron jobs without a traditional data store.
+NodeJS APIs for turning a crontab into a structured data store. Create, edit, delete and pause cron jobs using only the native crontab software.
 
 ### Development
 Initialize the `node_modules` directory with `npm install`.
