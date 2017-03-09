@@ -36,7 +36,7 @@ module.exports = (router) => {
   router.post('/create', (request, response) => {
     const payload = extractPayload(request);
 
-    if (global.lob) {
+    if (global.log) {
       global.log.info('request:/create');
       global.log.info(JSON.stringify(payload));
     }
@@ -52,7 +52,7 @@ module.exports = (router) => {
   router.post('/delete', (request, response) => {
     const payload = extractPayload(request);
 
-    if (global.lob) {
+    if (global.log) {
       global.log.info('request:/delete');
       global.log.info(JSON.stringify(payload));
     }
@@ -68,7 +68,7 @@ module.exports = (router) => {
   router.post('/edit', (request, response) => {
     const payload = extractPayload(request);
 
-    if (global.lob) {
+    if (global.log) {
       global.log.info('request:/edit');
       global.log.info(JSON.stringify(payload));
     }
