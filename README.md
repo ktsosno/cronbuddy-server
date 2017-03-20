@@ -18,7 +18,7 @@ app info Port: 9191
 app info IP: 127.0.0.1
 ```
 
-#### Documentation
+### Documentation
 
 **Load Jobs**
 
@@ -129,6 +129,8 @@ Sample Response:
 ```
 
 Note: Short of commenting out a line, there isn't a way to pause a job in the crontab. This API prepends the command with a `#paused` comment to track its state.
+
+------
 
 #### Options
 The recommended way is to create a configuration file at `app/config.js`. This contains your chosen port and crontab user.
