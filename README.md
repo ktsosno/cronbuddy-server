@@ -56,17 +56,17 @@ Sample Response:
 
 Method `POST`
 
+Sample Request:
+```
+/api/create
+```
+
 Params:
 ```json
 {
  "action": "ls -l",
  "timing": "0 12 * * *"
 }
-```
-
-Sample Request:
-```
-/api/create
 ```
 
 Sample Response:
@@ -82,17 +82,17 @@ Sample Response:
 
 Method `POST`
 
+Sample Request:
+```
+/api/edit
+```
+
 Params:
 ```json
 {
  "action": "ls -l",
  "timing": "0 11 * * *"
 }
-```
-
-Sample Request:
-```
-/api/edit
 ```
 
 Sample Response:
@@ -108,16 +108,16 @@ Sample Response:
 
 Method `POST`
 
+Sample Request:
+```
+/api/pause
+```
+
 Params:
 ```json
 {
  "action": "ls -l"
 }
-```
-
-Sample Request:
-```
-/api/pause
 ```
 
 Sample Response:
