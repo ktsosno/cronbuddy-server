@@ -21,12 +21,15 @@ app info IP: 127.0.0.1
 #### Documentation
 
 **Load Jobs**
+
 Method `GET`
+
 Sample Request:
 ```
 /api/load               // All active jobs
 /api/load?type=paused   // All paused jobs
 ```
+
 Sample Response:
 ```
 {
@@ -49,7 +52,9 @@ Sample Response:
 ```
 
 **Create Job**
+
 Method `POST`
+
 Params:
 ```
 {
@@ -57,10 +62,12 @@ Params:
  'timing': '0 12 * * *'
 }
 ```
+
 Sample Request:
 ```
 /api/create
 ```
+
 Sample Response:
 ```
 {
@@ -71,6 +78,7 @@ Sample Response:
 
 **Delete Job**
 Method `POST`
+
 Params:
 ```
 {
@@ -78,10 +86,12 @@ Params:
  'timing': '0 11 * * *'
 }
 ```
+
 Sample Request:
 ```
 /api/edit
 ```
+
 Sample Response:
 ```
 {
@@ -91,17 +101,21 @@ Sample Response:
 ```
 
 **Pause Job**
+
 Method `POST`
+
 Params:
 ```
 {
  'action': 'ls -l'
 }
 ```
+
 Sample Request:
 ```
 /api/pause
 ```
+
 Sample Response:
 ```
 {
