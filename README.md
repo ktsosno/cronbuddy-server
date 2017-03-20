@@ -1,5 +1,5 @@
 # CronBuddy Node APIs
-Node APIs for turning a crontab into a data store. Create, edit, delete and pause cron jobs using only the native crontab. These APIs leverage [node-crontab](https://github.com/dachev/node-crontab) for access to the tab via Node.
+Node APIs for turning a crontab into a data store. Create, edit, delete and pause cron jobs using only the native crontab. These APIs leverage [node-crontab](https://github.com/dachev/node-crontab) for access to the tab.
 
 ### Development
 Initialize the `node_modules` directory with `npm install`.
