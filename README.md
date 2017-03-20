@@ -1,13 +1,116 @@
-# CronBuddy
-NodeJS APIs for turning a crontab into a structured data store. Create, edit, delete and pause cron jobs using only the native crontab software.
+# CronBuddy Node APIs
+Node APIs for turning a crontab into a data store. Create, edit, delete and pause cron jobs using only the native crontab. These APIs leverage [node-crontab](https://github.com/dachev/node-crontab) for access to the tab via Node.
 
 ### Development
 Initialize the `node_modules` directory with `npm install`.
 Run `npm run watch:server` in the application root to watch the development folder. The output is minified to `server.js` in the application root.
 
 ### Running the Server
-Start the server with root access:
-`sudo node server.js`
+You can start the server with a certain user or as root to be able to access all users' crontabs. There is `start_server` script included if you are running this outside of pm2.
+
+```
+$ sudo ./start_server 
+[sudo] password for kyle: 
+app info CronBuddy Server Running
+app info Cron User: kyle
+app info Node User: root
+app info Port: 9191
+app info IP: 127.0.0.1
+```
+
+#### Documentation
+
+**Load Jobs**
+Method `GET`
+Sample Request:
+```
+/api/load               // All active jobs
+/api/load?type=paused   // All paused jobs
+```
+Sample Response:
+```
+{
+  "jobs": [
+    {
+      "action": "ls -l",
+      "timing": {
+        "fullString": "0 12 * * *",
+        "values": {
+          "dow": "0",
+          "month": "12",
+          "dom": "*",
+          "hour": "*",
+          "minute": "*"
+        }
+      }
+    }
+  ]
+}
+```
+
+**Create Job**
+Method `POST`
+Params:
+```
+{
+ 'action': 'ls -l',
+ 'timing': '0 12 * * *'
+}
+```
+Sample Request:
+```
+/api/create
+```
+Sample Response:
+```
+{
+  "message": "Job successfully created",
+  "success": true
+}
+```
+
+**Delete Job**
+Method `POST`
+Params:
+```
+{
+ 'action': 'ls -l',
+ 'timing': '0 11 * * *'
+}
+```
+Sample Request:
+```
+/api/edit
+```
+Sample Response:
+```
+{
+  "message": "Job successfully edited",
+  "success": false
+}
+```
+
+**Pause Job**
+Method `POST`
+Params:
+```
+{
+ 'action': 'ls -l'
+}
+```
+Sample Request:
+```
+/api/pause
+```
+Sample Response:
+```
+{
+  "message": "Contab successfully updated",
+  "success": true
+}
+```
+
+Note: Short of commenting out a line, there isn't a way to pause a job in the crontab. This API prepends the command with a `#paused` comment to track its state.
 
 #### Options
 The recommended way is to create a configuration file at `app/config.js`. This contains your chosen port and crontab user.
@@ -26,48 +129,4 @@ node server.js
         -p=8181         // Specify the port for node server
         -u=myUser       // Specify which user's crontab to invoke, default `whoami`
         -i=127.0.0.1    // Override the local IP
-```
-
-### Nginx Configuration
-Here is a sample Nginx configuration for running the node APIs. This also covers SSL and passwd authentication. This configuration forces a redirect to the SSL host on non-SSL requests.
-
-```
-server {
-        listen 80;
-        listen [::]:80;
-
-        server_name <hostname>;
-
-        # Forward inbound requests to SSL port
-        return 301 https://$server_name$request_uri;
-}
-
-server {
-        listen 443 ssl http2;
-        listen [::]:443 ssl http2;
-
-        include /etc/nginx/snippets/ssl-certs/<ssl-cert-file>
-        include /etc/nginx/snippets/ssl-params.conf;
-
-        server_name <hostname>;
-
-        # Node APIs
-        # This location must match your server.js definition
-        location /api {
-                # API and Web need auth_basic to prevent direct API access
-                auth_basic "Restrictred";
-                auth_basic_user_file /etc/nginx/<password-location>
-
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-NginX-Proxy true;
-
-                # Make sure this matches your intended node port
-                proxy_pass http://localhost:9191/;
-                proxy_ssl_session_reuse off;
-                proxy_set_header Host $http_host;
-                proxy_cache_bypass $http_upgrade;
-                proxy_redirect off;
-        }
-}
 ```
