@@ -59,8 +59,8 @@ Method `POST`
 Params:
 ```json
 {
- 'action': 'ls -l',
- 'timing': '0 12 * * *'
+ "action": "ls -l",
+ "timing": "0 12 * * *"
 }
 ```
 
@@ -85,8 +85,8 @@ Method `POST`
 Params:
 ```json
 {
- 'action': 'ls -l',
- 'timing': '0 11 * * *'
+ "action": "ls -l",
+ "timing": "0 11 * * *"
 }
 ```
 
@@ -111,7 +111,7 @@ Method `POST`
 Params:
 ```json
 {
- 'action': 'ls -l'
+ "action": "ls -l"
 }
 ```
 
