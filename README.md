@@ -57,7 +57,7 @@ Sample Response:
 Method `POST`
 
 Params:
-```
+```json
 {
  'action': 'ls -l',
  'timing': '0 12 * * *'
@@ -70,7 +70,7 @@ Sample Request:
 ```
 
 Sample Response:
-```
+```json
 {
   "message": "Job successfully created",
   "success": true
@@ -83,7 +83,7 @@ Sample Response:
 Method `POST`
 
 Params:
-```
+```json
 {
  'action': 'ls -l',
  'timing': '0 11 * * *'
@@ -96,7 +96,7 @@ Sample Request:
 ```
 
 Sample Response:
-```
+```json
 {
   "message": "Job successfully edited",
   "success": false
@@ -109,7 +109,7 @@ Sample Response:
 Method `POST`
 
 Params:
-```
+```json
 {
  'action': 'ls -l'
 }
@@ -121,7 +121,7 @@ Sample Request:
 ```
 
 Sample Response:
-```
+```json
 {
   "message": "Contab successfully updated",
   "success": true
@@ -136,7 +136,7 @@ Note: Short of commenting out a line, there isn't a way to pause a job in the cr
 The recommended way is to create a configuration file at `app/config.js`. This contains your chosen port and crontab user.
 
 Example config:
-```
+```js
 module.exports = {
   PORT: 9191,                    // Default if no config created
   USER: 'root'                   // Default if no config created
