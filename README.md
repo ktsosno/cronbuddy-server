@@ -31,7 +31,7 @@ Sample Request:
 ```
 
 Sample Response:
-```
+```json
 {
   "jobs": [
     {
