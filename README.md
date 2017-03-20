@@ -24,13 +24,13 @@ app info IP: 127.0.0.1
 
 Method `GET`
 
-Sample Request:
+Request:
 ```
 /api/load               // All active jobs
 /api/load?type=paused   // All paused jobs
 ```
 
-Sample Response:
+Response:
 ```json
 {
   "jobs": [
@@ -56,7 +56,7 @@ Sample Response:
 
 Method `POST`
 
-Sample Request:
+Request:
 ```
 /api/create
 ```
@@ -69,7 +69,7 @@ Params:
 }
 ```
 
-Sample Response:
+Response:
 ```json
 {
   "message": "Job successfully created",
@@ -82,7 +82,7 @@ Sample Response:
 
 Method `POST`
 
-Sample Request:
+Request:
 ```
 /api/edit
 ```
@@ -95,7 +95,7 @@ Params:
 }
 ```
 
-Sample Response:
+Response:
 ```json
 {
   "message": "Job successfully edited",
@@ -108,7 +108,7 @@ Sample Response:
 
 Method `POST`
 
-Sample Request:
+Request:
 ```
 /api/pause
 ```
@@ -120,7 +120,7 @@ Params:
 }
 ```
 
-Sample Response:
+Response:
 ```json
 {
   "message": "Contab successfully updated",
