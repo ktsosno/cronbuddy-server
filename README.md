@@ -51,6 +51,7 @@ Sample Response:
 }
 ```
 
+------
 **Create Job**
 
 Method `POST`
@@ -76,7 +77,9 @@ Sample Response:
 }
 ```
 
+------
 **Delete Job**
+
 Method `POST`
 
 Params:
@@ -100,6 +103,7 @@ Sample Response:
 }
 ```
 
+------
 **Pause Job**
 
 Method `POST`
