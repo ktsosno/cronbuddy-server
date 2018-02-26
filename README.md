@@ -99,7 +99,7 @@ Response:
 ```json
 {
   "message": "Job successfully edited",
-  "success": false
+  "success": true
 }
 ```
 
